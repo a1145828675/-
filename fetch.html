@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--<div id="app">-->
+    <!--</div>-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+
+//       var vm = new Vue({
+//            el:'#app',
+//            data:{
+//                prop:{}
+//            }
+//        });
+       var url = 'https://www.toutiao.com/api/pc/hot_gallery/?widen=1';
+       var obj = {};
+       $.ajax({
+           url:url,
+           data:"get",
+           dataType: 'jsonp',  // 请求方式为jsonp
+           success:function (res) {
+               console.log(res.data);
+               obj = res.data
+               for (let i = 0;i<res.data.length;i++){
+                   console.log(i)
+                   console.log(res.data[i].title)
+               }
+           },
+           error:function (res) {
+               console.log(res);
+           }
+       });
+//        fetch(url)
+//            .then(function (response) {
+//                console.log(response)
+//                return response.json()
+//            })
+//            .then(function (data) {
+//                console.log(data)
+//            });
+//        var a={"name":"2323","sex":"afasdf","age":"6262"};//json
+//        var b='{"name":"2323","sex":"afasdf","age":"6262"}';//json字符串
+//        console.log(a);
+//        console.log(a.name);
+//        console.log(b);
+//        console.log(b.name);
+
+    </script>
+</body>
+</html>

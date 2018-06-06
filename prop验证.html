@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <my-child
+            :num="100"
+            :msg="100"
+            :object="{a:'a'}"
+            :cust="100"
+    ></child>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+<script type="text/javascript">
+    Vue.component('my-child', {
+        props: {
+            // 基础类型检测 (`null` 意思是任何类型都可以)
+            num: Number,
+            // 多种类型
+            propB: [String, Number],
+            // 必传且是字符串
+            msg: {
+                type: String,
+                required: true
+            },
+            // 数字，有默认值
+            num1: {
+                type: Number,
+                default: 1000
+            },
+            // 数组/对象的默认值应当由一个工厂函数返回
+            object: {
+                type: Object,
+                default: function () {
+                    return { message: 'hello' }
+                }
+            },
+            // 自定义验证函数
+            cust: {
+                validator: function (value) {
+                    return value > 10
+                }
+            }
+        },
+        template:  `<div>
+                            <p>{{ num }}</p>
+                            <p>{{ msg }}</p>
+                            <p>{{ num1 }}</p>
+                            <p>{{ object }}</p>
+                            <p>{{ cust }}</p>
+                        </div>`
+    })
+    new Vue({
+        el: "#app"
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        template{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-component v-show="display"></my-component>
+    </div>
+    <template id="myComponent">
+       <div>
+           <h3>{{ msg }}</h3>
+           <button v-on:click="showMsg">show messages</button>
+       </div>
+    </template>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                display:true,
+            },
+            components:{
+                'my-component': {
+                    template: '#myComponent',
+                    data:function () {
+                        return{
+                            msg : 'This is a component',
+                            display:false
+                        }
+                    },
+                    methods: {
+                        showMsg:function () {
+                            alert(this.msg)
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

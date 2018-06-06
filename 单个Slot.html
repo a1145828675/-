@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-component>
+            <h1>Hello Vue.js!</h1>
+        </my-component>
+
+        <my-component>
+        </my-component>
+    </div>
+    <template id="myComponent">
+        <div class="content">
+            <slot>如果没有分发内容，则显示slot中的内容</slot>
+        </div>
+    </template>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script>
+        Vue.component('my-component', {
+            template: '#myComponent'
+        });
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>

@@ -31,33 +31,32 @@
 		<template id="myComponent3">
 			<div>This is the first component3!</div>
 		</template>
-		
 		<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
 		<script type="text/javascript">
 			var myview = Vue.extend({
 				template:"<div>这是我创建的第一个组件</div>"
-			})
+			});
 			var myviews = Vue.extend({
 				template:"<div>这是我创建的第二个组件</div>"
-			})
+			});
 			var child = Vue.extend({
 				template:"<div>这是我创建的子组件</div>"
-			})
+			});
 			var parent = Vue.extend({
 				template:"<div>这是我创建的父组件<child-component></child-component></div>",
 				components:{
 					"child-component":child
 				}
-			})
-			
+			});
+
 			Vue.component('my-component',myview)
 			Vue.component('parent-component',parent)
 			Vue.component('my-component1',{
 				template: '<div>This is the first component1!</div>'
-			})
+			});
 			Vue.component('my-component3',{
 				template: '#myComponent3'
-			})
+			});
 			var app1 = new Vue({
 				el:"#app",
 			});
@@ -76,7 +75,7 @@
                 	// 将myComponent组件注册到Vue实例下
                 	'my-view' : myviews
             	}
-			})
+			});
 		</script>
 	</body>
 </html>

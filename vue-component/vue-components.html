@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>  <!--my-component标签只能在Vue实例下使用-->
+        <!--<my-component2></my-component2> 只能在app2局部中使用的组件-->
+
+    </div>
+    <!--该组件不会被渲染-->
+    <my-component></my-component>
+
+    <!--只能在app2中使用的组件-->
+    <div id="app2">
+        <my-component2></my-component2>
+    </div>
+    <!--父子组件-->
+    <div id="app3">
+        <parent-component></parent-component>
+    </div>
+
+    <div id="app4">
+        <my-component1></my-component1>
+        <my-component6></my-component6>
+    </div>
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+<script>
+    //1、使用Vue.extent()创建一个组件构造器;
+    var myComponent = Vue.extend({
+        template:'<div>This is my first component !</div>'
+    });
+    var myComponent2 = Vue.extend({
+        template:'<div>This is my second component !</div>'
+    });
+    //2、注册组件，并指定组件的标签，组件的html标签为<my-component>
+    Vue.component('my-component',myComponent);
+    //3、需要创建一个Vue实例，才能显示组件
+    var app1 = new Vue({ el:'#app', });
+
+    //4、创建一个局部的组件;
+    var app2 = new Vue({
+        el:"#app2",
+        components:{'my-component2':myComponent2}
+    });
+    //5、父子组件
+    //创建子组件
+    var child = Vue.extend({
+        template:'<div>This is a child component!</div>'
+    });
+    //创建父组件
+    var parent = Vue.extend({
+        // 在Parent组件内使用<child-component>标签
+        template:`<div><p>This is a parent component!</p><child-component></child-component></div>`,
+        // 局部注册Child组件，该组件只能在Parent组件内使用
+        components:{
+            "child-component":child
+        }
+    });
+    // 全局注册Parent组件
+    Vue.component('parent-component',parent);
+    var app3 = new Vue({ el:'#app3', });
+
+    //6、全局注册，my-component1是标签名称 语法糖
+    Vue.component('my-component1',{
+        template: '<div>This is the first component!</div>'
+    });
+    //7、局部注册
+    var app4 = new Vue({
+        el: '#app4',
+        components:{
+            'my-component6':{
+                template:'<div>This is the second component!</div>'
+            }
+        }
+    })
+
+
+//    function log(x, y = 'World') {
+//        console.log(x, y);
+//    }
+//    log('Hello');// Hello World
+//    log('Hello', 'China');// Hello China
+//    log('Hello', ''); // Hello
+//
+//    function Point(x=1 ,y=2){
+//        this.x = x;
+//        this.y = y;
+//        console.log(x);
+//        console.log(y);
+//    }
+//    Point(8,9);
+//
+//
+//    function foo({x, y = 5}={}) {
+//        console.log(x, y);
+//    }
+//
+//    foo({}); // undefined 5
+//    foo({x: 1}); // 1 5
+//    foo({x: 1, y: 2}); // 1 2
+//    foo(); // TypeError: Cannot read property 'x' of undefined
+
+
+//    for (var i = 0; i< 5; i++) {
+//        setTimeout(function () {
+//            console.log(i);
+//        }, 1000 * 1);
+//    }
+//
+//    for (var i = 0; i < 5; i++) {
+//        (function(i){
+//            setTimeout(function() {
+//                console.log(i);
+//            }, 1000 * i);
+//        })(i);
+//
+//    }
+
+//    for (var i = 0; i < 5; i++) {
+//        setTimeout((function(i) {
+//            console.log(i);
+//        })(i), i * 1000);
+//    }
+
+//    var funcs = [];
+//    for (var i = 0; i < 10; i++) {
+//        funcs.push(function() { console.log(i) })
+//    }
+//    funcs.forEach(function(func) {
+//        console.log(func)
+//        func()
+//    });
+
+//    var funcs = [];
+//    for (var i = 0; i < 10; i++) {
+//        funcs.push(function() {
+//            console.log(i)
+//        })
+//    }
+//    funcs.forEach( func => func());
+////    / 再来看看es6怎么处理的
+//    const funcs = []
+//    for (let i = 0; i < 10; i++) {
+//        funcs.push(function() {
+//            console.log(i)
+//        })
+//    }
+//    funcs.forEach(func => func());
+//
+//    var names = 'chen';
+//    console.log('hello' + names);
+//
+//    const name = 'lux';
+//    console.log(`hello ${name}`) //hello lux
+
+    function fn1() {
+        var name = 'iceman';
+        function fn2() {
+            console.log(name);
+        }
+        return fn2;
+    }
+    var fn3 = fn1();
+    fn3();
+
+    function demo1(){
+        var m=5;
+        return m;
+    }
+    function demo2(){
+        var m=55;
+        alert(m);
+    }
+    var a=demo1;//a是整个函数体，是一个函数对象
+    var b=demo1();//b是函数执行后返回的值5
+    alert(demo1);
+    alert(demo1());
+</script>
+</body>
+</html>
